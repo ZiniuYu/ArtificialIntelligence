@@ -190,6 +190,14 @@ processes.
 The **behaviorism** movement rejected any theory involving mental processes on 
 the grounds that introspection could not provide reliable evidence.
 
+**Cognitive psychology** views the brain as an information-processing device.
+Three key steps of a knowledge-based agent: (1) the stimulus must be translated 
+into an internal representation, (2) the representation is manipulated by 
+cognitive processes to derive new internal representations, and (3) these are in 
+turn retranslated back into action.
+
+**Intelligence augmentation** states that computers should augment human 
+abilities rather than automate away human tasks.
 
 1.2.6 Computer engineering
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
