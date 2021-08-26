@@ -100,7 +100,17 @@
 <li class="toctree-l4"><a class="reference internal" href="#beneficial-machines">1.1.5 Beneficial machines</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#the-foundations-of-artificial-intelligence">1.2 The Foundations of Artificial Intelligence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-foundations-of-artificial-intelligence">1.2 The Foundations of Artificial Intelligence</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#philosophy">1.2.1 Philosophy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mathematics">1.2.2 Mathematics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#economics">1.2.3 Economics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#neuroscience">1.2.4 Neuroscience</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#psychology">1.2.5 Psychology</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#computer-engineering">1.2.6 Computer engineering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#control-theory-and-cybernetics">1.2.7 Control theory and cybernetics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linguistics">1.2.8 Linguistics</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#the-history-of-artificial-intelligence">1.3 The History of Artificial Intelligence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#the-sate-of-the-art">1.4 The Sate of the Art</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#risks-and-benefits-of-ai">1.5 Risks and Benefits of AI</a></li>
@@ -285,13 +295,133 @@ among them.</p>
 <p>An <strong>agent</strong> is just something that acts.
 A <strong>rational agent</strong> is one that acts so as to achieve the best outcome or, when
 there is uncertainty, the best expected outcome.</p>
+<p><em>AI has focused on the study and constructionof agents that</em> <strong>do the right thing</strong>.
+This general paradigm is so pervasive that we might call it the <strong>standard model</strong>.</p>
+<p><strong>Limited rationality</strong>: act appropriately when there is not enough time to do all the computations one might take.</p>
 </div>
 <div class="section" id="beneficial-machines">
 <h3>1.1.5 Beneficial machines<a class="headerlink" href="#beneficial-machines" title="Permalink to this headline">¶</a></h3>
+<p>The standard model has been a useful guide for AI research since its inception,
+but it is probably not the right model in the long run.
+The reason is that the standard model assumes that we will supply a fully specified objective to the machine.</p>
+<p>The problem of achieving agreement between our true preferences and the
+objective we put into the machine is called the <em>value alignment problem*</em>: the
+values or objectives put intothe machine must be aligned with those of the human.</p>
+<p>We don’t want machines that are intelligent in the sense of pursuing <em>their</em>
+objectives; we want them to pursue <em>our</em> objectives.
+Ultimately, we want agents that are <strong>provably beneficial</strong> to humans.</p>
 </div>
 </div>
 <div class="section" id="the-foundations-of-artificial-intelligence">
 <h2>1.2 The Foundations of Artificial Intelligence<a class="headerlink" href="#the-foundations-of-artificial-intelligence" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="philosophy">
+<h3>1.2.1 Philosophy<a class="headerlink" href="#philosophy" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Can formal rules be used to draw valid conclusions?</p></li>
+<li><p>How does the mind arise from a physical brain?</p></li>
+<li><p>Where does knowledge come from?</p></li>
+<li><p>How does knowledge lead to action?</p></li>
+</ul>
+<p>Descartes was a proponent of <strong>dualism</strong>.
+He held that there is a part of the human mind (or soul or spirit) that is outside of nature, exempt from physical laws.
+Animals, on the other hand, did not possess this dual quality; they could be treated as machines.</p>
+<p>An alternative to dualism is <strong>materialism</strong>, which holds that the brain’s
+operation according to the laws of physics constitutes the mind.
+Free will is simply the way that the perception of available choices appears to the choosing entity.</p>
+<p>The <strong>empiricism</strong> is characterized by a dictum of John Locke (1632–1704):
+“Nothing is in the understanding, which was not first in the senses.”</p>
+<p>The <strong>logical positivism</strong> holds that all knowledge can be characterized by
+logical theories connected, ultimately, to <strong>observation sentences</strong> that
+correspond to sensory inputs; thus logical positivism combines rationalism and
+empiricism.</p>
+<p>The <strong>confirmation theory</strong> attempted to analyze the acquisition of knowledge
+from experience by quantifying the degree of belief that should be assigned to
+logical sentences based on their connection to observations that confirm or
+disconfirm them.</p>
+<p><strong>Utilitarianism</strong>: that rational decision making based on maximizing utility
+should apply to all spheres of human activity, including public policy decisions
+made on behalf of many individuals.
+Utilitarianism is a specific kind of <strong>consequentialism</strong>: the idea that what is
+right and wrong is determined by the expected outcomes of an action.</p>
+<p>In contrast, a theory of rule-based or <strong>deontological ethics</strong>, in which “doing
+the right thing” is determined not by outcomes but by universal social laws that
+govern allowable actions, such as “don’t lie” or “don’t kill.”
+Many modern AI systems adopt exactly this approach.</p>
+</div>
+<div class="section" id="mathematics">
+<h3>1.2.2 Mathematics<a class="headerlink" href="#mathematics" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>What are the formal rules to draw valid conclusions?</p></li>
+<li><p>What can be computed?</p></li>
+<li><p>How do we reason with uncertain information?</p></li>
+</ul>
+<p>The theory of <strong>probability</strong> can be seen as generalizing logic to situations
+with uncertain information—a consideration of great importance for AI.
+The formalization of probability, combined with the availability of data, led to
+the emergence of <strong>statistics</strong> as a field.</p>
+<p>The history of computation is as old as the history of numbers, but the first
+nontrivial <strong>algorithm</strong> is thought to be Euclid’s algorithm for computing
+greatest common divisors.
+The <strong>incompleteness theorem</strong> showed that in any formal theory as strong as
+Peano arithmetic (the elementary theory of natural numbers), there are
+necessarily true statements that have no proof within the theory.</p>
+<p>Alan Turing tried to characterize exactly which functions <em>are</em> <strong>computable</strong>
+—capable of being computed by an effective procedure.
+For example, no machine can tell <em>in general</em> whether a given program will
+return an answer on a given input or run forever.</p>
+<p>Although computability is important to an understanding of computation, the
+notion of <strong>tractability</strong> has had an even greater impact on AI.
+A problem is called intractable if the time required to solve instances of the
+problem grows exponentially with the size of the instances.</p>
+<p>The theory of <strong>NP-completeness</strong> provides a basis for analyzing the
+tractability of problems: any problem class to which the class of NP-complete
+problems can be reduced is likely to be intractable.</p>
+</div>
+<div class="section" id="economics">
+<h3>1.2.3 Economics<a class="headerlink" href="#economics" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>How should we make decisions in accordance with our preferences?</p></li>
+<li><p>How should we do this when others may not go along?</p></li>
+<li><p>How should we do this when the payoff may be far in the future?</p></li>
+</ul>
+<p><strong>Decision theory</strong>, which combines probability theory with utility theory,
+provides a formal and complete framework for individual decisions (economic or
+otherwise) made under uncertainty—that is, in cases where probabilistic
+descriptions appropriately capture the decision maker’s environment.</p>
+<p>Models based on <strong>satisficing</strong>—making decisions that are “good enough,” rather
+than laboriously calculating an optimal decision—gave a better description of
+actual human behavior.</p>
+</div>
+<div class="section" id="neuroscience">
+<h3>1.2.4 Neuroscience<a class="headerlink" href="#neuroscience" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>How do brains process information?</p></li>
+</ul>
+<p><strong>Neuroscience</strong> is the study of the nervous system, particularly the brain.
+<em>A collection of simple cells can lead to thought, action, and consciousness</em>.</p>
+<p>Even with a computer of virtually unlimited capacity, we still require further
+conceptual breakthroughs in our understanding of intelligence.</p>
+</div>
+<div class="section" id="psychology">
+<h3>1.2.5 Psychology<a class="headerlink" href="#psychology" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>How do humans and animals think and act?</p></li>
+</ul>
+<p>Wundt insisted on carefully controlled experiments in which his workers would
+perform a perceptual or associative task while introspecting on their thought
+processes.
+The <strong>behaviorism</strong> movement rejected any theory involving mental processes on
+the grounds that introspection could not provide reliable evidence.</p>
+</div>
+<div class="section" id="computer-engineering">
+<h3>1.2.6 Computer engineering<a class="headerlink" href="#computer-engineering" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="control-theory-and-cybernetics">
+<h3>1.2.7 Control theory and cybernetics<a class="headerlink" href="#control-theory-and-cybernetics" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="linguistics">
+<h3>1.2.8 Linguistics<a class="headerlink" href="#linguistics" title="Permalink to this headline">¶</a></h3>
+</div>
 </div>
 <div class="section" id="the-history-of-artificial-intelligence">
 <h2>1.3 The History of Artificial Intelligence<a class="headerlink" href="#the-history-of-artificial-intelligence" title="Permalink to this headline">¶</a></h2>
