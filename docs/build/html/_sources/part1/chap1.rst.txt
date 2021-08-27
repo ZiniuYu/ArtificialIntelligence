@@ -202,23 +202,79 @@ abilities rather than automate away human tasks.
 1.2.6 Computer engineering
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+* How can we build an efficient computer?
 
-
-
+**Moore’s law** states that performance doubled every 18 months.
+**Quantum computing** holds out the promise of far greater accelerations for 
+some important subclasses of AI algorithms.
 
 1.2.7 Control theory and cybernetics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+* How can artifacts operate under their own control?
 
-
+Modern control theory, especially the branch known as stochastic optimal 
+control, has as its goal the design of systems that maximize a **cost function** 
+over time.
 
 1.2.8 Linguistics
 ^^^^^^^^^^^^^^^^^
 
+* How does language relate to thought?
+
+Modern linguistics and AI, then, were “born” at about the same time, and grew up 
+together, intersecting in a hybrid field called **computational linguistics** or 
+**natural language processing**.
 
 1.3 The History of Artificial Intelligence
 ------------------------------------------
 
+1.3.1 The inception of artificial intelligence (1943-1956)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The first work that is now generally recognized as AI was done by Warren 
+McCulloch and Walter Pitts (1943).
+
+1.3.2 Early enthusiasm, great expectations (1952-1969)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The intellectual establishment of the 1950s, by and large, preferred to believe
+that "a machine can never do X".
+John McCarthy referred to this period as the "Look, Ma, no hands!" era.
+
+1.3.3 A does of reality (1966-1973)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In almost all cases these early systems failed on more difficult problems.
+The illusion of unlimited computational power was not confined to problem-solving programs.
+
+1.3.4 Expert systems (1969-1986)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The picture of problem solving that had arisen during the first decade of AI 
+research was of a general-purpose search mechanism trying to string together 
+elementary reasoning steps to find complete solutions.
+Such approaches have been called **weak methods**.
+The alternative to weak methods is to use more powerful, domain-specific 
+knowledge that allows larger reasoning steps and can more easily handle 
+typically occurring cases in narrow areas of expertise.
+
+1.3.5 The return of neural networks (1986-present)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In the mid-1980s at least four different groups reinvented the 
+**back-propagation** learning algorithm first developed in the early 1960s.
+
+1.3.6 Probabilistic reasoning and machine learning (1987-present)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+1.3.7 Big data (2001-present)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+1.3.8 Deep learning (2011-present)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
