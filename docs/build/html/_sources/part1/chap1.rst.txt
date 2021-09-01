@@ -268,21 +268,60 @@ In the mid-1980s at least four different groups reinvented the
 1.3.6 Probabilistic reasoning and machine learning (1987-present)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+In the 1980s, approaches using **hidden Markov models** (HMMs) came to dominate the area.
+Pearl’s development of **Bayesian networks** yielded a rigorous and efficient 
+formalism for representing uncertain knowledge as well as practical algorithms 
+for probabilistic reasoning.
 
 1.3.7 Big data (2001-present)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Remarkable advances in computing power and the creation of the World Wide Web 
+have facilitated the creation of very large data sets—a phenomenon sometimes 
+known as **big data**.
 
 1.3.8 Deep learning (2011-present)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
+The term **deep learning** refers to machine learning using multiple layers of simple, adjustable computing elements. 
+Experiments were carried out with such networks as far back as the 1970s, and in 
+the form of **convolutional neural networks** they found some success in 
+handwritten digit recognition in the 1990s.
 
 1.4 The Sate of the Art
 -----------------------
 
+**ROBOTIC VEHICLES**
 
+**LEGGED LOCOMOTION**
 
+**AUTONOMOUS PLANNING AND SCHEDULING**
+
+**MACHINE TRANSLATION**
+
+**SPEECH RECOGNITION**
+
+**RECOMMENDATIONS**
+
+**GAME PLAYING**
+
+**IMAGE UNDERSTANDING**
+
+**MEDICINE**
+
+**CLIMATE SCIENCE**
 
 1.5 Risks and Benefits of AI
 ----------------------------
+
+**LETHAL AUTONOMOUS WEAPONS**
+
+**SURVEILLANCE AND PERSUASION**
+
+**BIASED DECISION MAKING**
+
+**IMPACT ON EMPLOYMENT**
+
+**SAFETY-CRITICAL APPLICATIONS**
+
+**CYBERSECURITY**
