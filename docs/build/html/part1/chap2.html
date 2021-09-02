@@ -95,6 +95,17 @@
 <li class="toctree-l3"><a class="reference internal" href="#agents-and-environments">2.1 Agents and Environments</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#good-behavior-the-concept-of-rationality">2.2 Good Behavior: The Concept of Rationality</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#performance-measures">2.2.1 Performance measures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rationality">2.2.2 Rationality</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#the-nature-of-environments">2.3 The Nature of Environments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifying-the-task-environment">2.3.1 Specifying the task environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#properties-of-task-environments">2.3.2 Properties of task environments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#the-structure-of-agents">2.4 The Structure of Agents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#agent-programs">2.4.1 Agent programs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simple-reflex-agents">2.4.2 Simple reflex Agents</a></li>
 </ul>
 </li>
 </ul>
@@ -253,6 +264,100 @@ but AI has generally stuck to one notion called <strong>consequentialism</strong
 evaluate an agent’s behavior by its consequences.</p>
 <p>This notion of desirability is captured by a <strong>performance measure</strong> that
 evaluates any given sequence of environment states.</p>
+</div>
+<div class="section" id="rationality">
+<h3>2.2.2 Rationality<a class="headerlink" href="#rationality" title="Permalink to this headline">¶</a></h3>
+<p>What is rational at any given time depends on four things:</p>
+<ul class="simple">
+<li><p>The performance measure that defines the criterion of success.</p></li>
+<li><p>The agent’s prior knowledge of the environment.</p></li>
+<li><p>The actions that the agent can perform.</p></li>
+<li><p>The agent’s percept sequence to date.</p></li>
+</ul>
+<p><strong>Definition of a rational agent</strong>: <em>For each possible percept sequence, a</em>
+<em>rational agent should select an action that is expected to maximize its</em>
+<em>performance measure, given the evidence provided by the percept sequence and</em>
+<em>whatever built-in knowledge the agent has</em>.</p>
+<p>2.2.3 Omniscience, learning, and autonomy</p>
+<p>We need to be careful to distinguish between rationality and <strong>omniscience</strong>.
+An omniscient agent knows the <em>actual</em> outcome of its actions and can act
+accordingly; but omniscience is impossible in reality.</p>
+<p>Rationality maximizes <em>expected</em> performance, while perfection maximizes <em>actual</em> performance.</p>
+<p>Doing actions <em>in order to modify future percepts</em>—sometimes called <strong>information gathering</strong>.
+Our definition requires a rational agent not only to gather information but also
+to <strong>learn</strong> as much as possible from what it perceives.</p>
+<p>To the extent that an agent relies on the prior knowledge of its designer rather
+than on its own percepts and learning processes, we say that the agent lacks
+<strong>autonomy</strong>.
+A rational agent should be autonomous—it should learn what it can to compensate
+for partial or incorrect prior knowledge.</p>
+</div>
+</div>
+<div class="section" id="the-nature-of-environments">
+<h2>2.3 The Nature of Environments<a class="headerlink" href="#the-nature-of-environments" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="specifying-the-task-environment">
+<h3>2.3.1 Specifying the task environment<a class="headerlink" href="#specifying-the-task-environment" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>task environment</strong> is composed of <strong>PEAS</strong> (Performance, Environment, Actuators, Sensors).</p>
+</div>
+<div class="section" id="properties-of-task-environments">
+<h3>2.3.2 Properties of task environments<a class="headerlink" href="#properties-of-task-environments" title="Permalink to this headline">¶</a></h3>
+<p><strong>FULLY OBSERVABLE VS. PARTIALLY OBSERVABLE</strong>: If an agent’s sensors give it
+access to the complete state of the environment at each point in time, then we
+say that the task environment is fully observable.
+An environment might be partially observable because of noisy and inaccurate
+sensors or because parts of the state are simply missing from the sensor data.
+If the agent has no sensors at all then the environment is <strong>unobservable</strong>.</p>
+<p><strong>SINGLE-AGENT VS. MULTIAGENT</strong>: The agent-design problems in multiagent
+environments are often quite different from those in single-agent environments.</p>
+<p><strong>DETERMINISTIC VS. NONDETERMINISTIC</strong>: If the next state of the environment is
+completely determined by the current state and the action executed by the
+agent(s), then we say the environment is deterministic; otherwise, it is
+nondeterministic.</p>
+<p><strong>EPISODIC VS. SEQUENTIAL</strong>: In an episodic task environment, the agent’s
+experience is divided into atomic episodes.
+Crucially, the next episode does not depend on the actions taken in previous episodes.
+In sequential environments, on the other hand, the current decision could affect all future decisions.</p>
+<p><strong>STATIC VS. DYNAMIC</strong>: If the environment can change while an agent is
+deliberating, then we say the environment is dynamic for that agent; otherwise,
+it is static.
+If the environment itself does not change with the passage of time but the
+agent’s performance score does, then we say the environment is <strong>semidynamic</strong>.</p>
+<p><strong>DISCRETE VS. CONTINUOUS</strong>: The discrete/continuous distinction applies to the
+<em>state</em> of the environment, to the way <em>time</em> is handled, and to the <em>percepts</em>
+and <em>actions</em> of the agent.</p>
+<p><strong>KNOWN VS. UNKNOWN</strong>: In a known environment, the outcomes (or outcome
+probabilities if the environment is nondeterministic) for all actions are given.
+Obviously, if the environment is unknown, the agent will have to learn how it works in order to make good decisions.</p>
+<p>The performance measure itself may be unknown, either because the designer is
+not sure how to write it down correctly or because the ultimate user—whose
+preferences matter—is not known.
+The hardest case is <em>partially observable</em>, <em>multiagent</em>, <em>nondeterministic</em>,
+<em>sequential</em>, <em>dynamic</em>, <em>continuous</em>, and <em>unknown</em>.</p>
+</div>
+</div>
+<div class="section" id="the-structure-of-agents">
+<h2>2.4 The Structure of Agents<a class="headerlink" href="#the-structure-of-agents" title="Permalink to this headline">¶</a></h2>
+<p>The job of AI is to design an <strong>agent program</strong> that implements the agent function—the mapping from percepts to actions.
+We assume this program will run on some sort of computing device with physical
+sensors and actuators—we call this the <strong>agent architecture</strong>:</p>
+<blockquote>
+<div><p><em>agent</em> = <em>architecture</em> + <em>program</em>.</p>
+</div></blockquote>
+<div class="section" id="agent-programs">
+<h3>2.4.1 Agent programs<a class="headerlink" href="#agent-programs" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/Figure2.7.png" src="../_images/Figure2.7.png" />
+<p>The daunting size of these tables means that (a) no physical agent in this
+universe will have the space to store the table; (b) the designer would not have
+time to create the table; and (c) no agent could ever learn all the right table
+entries from its experience.</p>
+<p><em>The key challenge for AI is to find out how to write programs that, to the</em>
+<em>extent possible, produce rational behavior from a smallish program rather than</em>
+<em>from a vast table</em>.</p>
+</div>
+<div class="section" id="simple-reflex-agents">
+<h3>2.4.2 Simple reflex Agents<a class="headerlink" href="#simple-reflex-agents" title="Permalink to this headline">¶</a></h3>
+<p>The simplest kind of agent is the <strong>simple reflex agent</strong>.
+These agents select actions on the basis of the <em>current</em> percept, ignoring the rest of the percept history.</p>
 </div>
 </div>
 </div>
