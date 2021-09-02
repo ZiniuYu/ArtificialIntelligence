@@ -1,13 +1,13 @@
 Chapter 2 Intelligent Agents
 ============================
 
-
-
 2.1 Agents and Environments
 ---------------------------
 
 An **agent** is anything that can be viewed as perceiving its **environment** 
 through **sensors** and acting upon that environment through **actuators**.
+
+.. image:: ../_static/Fig2.1.png
 
 We use the term **percept** to refer to the content an agent’s sensors are perceiving. 
 An agent’s **percept sequence** is the complete history of everything the agent has ever perceived. 
@@ -133,7 +133,7 @@ sensors and actuators—we call this the **agent architecture**:
 2.4.1 Agent programs
 ^^^^^^^^^^^^^^^^^^^^
 
-.. image:: ../_static/Figure2.7.png
+.. image:: ../_static/Fig2.7.png
 
 The daunting size of these tables means that (a) no physical agent in this 
 universe will have the space to store the table; (b) the designer would not have 
@@ -149,3 +149,149 @@ entries from its experience.
 
 The simplest kind of agent is the **simple reflex agent**. 
 These agents select actions on the basis of the *current* percept, ignoring the rest of the percept history.
+
+.. image:: ../_static/Fig2.8.png
+
+A more general and flexible approach is first to build a general-purpose 
+interpreter for condition–action rules and then to create rule sets for specific 
+task environments.
+
+.. image:: ../_static/Fig2.9.png
+
+.. image:: ../_static/Fig2.10.png
+
+The agent in Figure 2.10 will work *only if the correct decision can be made on*
+*the basis of just the current percept—that is, only if the environment is* 
+*fully observable*.
+Even a little bit of unobservability can cause serious trouble.
+Infinite loops are often unavoidable for simple reflex agents operating in 
+partially observable environments.
+Escape from infinite loops is possible if the agent can **randomize** its actions.
+
+2.4.3 Model-based reflex agents
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The most effective way to handle partial observability is for the agent to 
+*keep track of the part of the world it can’t see now*. 
+That is, the agent should maintain some sort of **internal state** that depends 
+on the percept history and thereby reflects at least some of the unobserved 
+aspects of the current state.
+
+Updating this internal state information as time goes by requires two kinds of 
+knowledge to be encoded in the agent program in some form. 
+First, we need some information about how the world changes over time, which can 
+be divided roughly into two parts: the effects of the agent’s actions and how 
+the world evolves independently of the agent.
+This knowledge about "how the world works"—whether implemented in simple Boolean 
+circuits or in complete scientific theories—is called a **transition model** of 
+the world.
+Second, we need some information about how the state of the world is reflected in the agent’s percepts.
+This kind of knowledge is called a **sensor model**.
+
+An agent that uses such models is called a **model-based agent**.
+
+.. image:: ../_static/Fig2.11.png
+
+.. image:: ../_static/Fig2.12.png
+
+2.4.4 Goal-based agents
+
+As well as a current state description, the agent needs some sort of goal 
+information that describes situations that are desirable.
+The agent program can combine this with the model (the same information as was 
+used in the model-based reflex agent) to choose actions that achieve the goal.
+
+.. image:: ../_static/Fig2.13.png
+
+**Search** and **planning** are the subfields of AI devoted to finding action sequences that achieve the agent’s goals.
+
+2.4.5 Utility-based agents
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+An agent's **utility function** is essentially an internalization of the performance measure. 
+Provided that the internal utility function and the external performance measure 
+are in agreement, an agent that chooses actions to maximize its utility will be 
+rational according to the external performance measure.
+
+A rational utility-based agent chooses the action that maximizes the 
+**expected utility** of the action outcomes—that is, the utility the agent 
+expects to derive, on average, given the probabilities and utilities of each
+outcome.
+
+.. image:: ../_static/Fig2.14.png
+
+A **model-free agent** can learn what action is best in a particular situation
+without ever learning exactly how that action changes the environment.
+
+2.4.6 Learning agents
+^^^^^^^^^^^^^^^^^^^^^
+
+A learning agent can be divided into four conceptual components. 
+The most important distinction is between the **learning element**, which is
+responsible for making improvements, and the **performance element**, which is 
+responsible for selecting external actions.
+The performance element is what we have previously considered to be the entire 
+agent: it takes in percepts and decides on actions. 
+The learning element uses feedback from the **critic** on how the agent is doing 
+and determines how the performance element should be modified to do better in 
+the future.
+
+.. image:: ../_static/Fig2.15.png
+
+The design of the learning element depends very much on the design of the performance element.
+Given a design for the performance element, learning mechanisms can be constructed to improve every part of the agent.
+
+The critic tells the learning element how well the agent is doing with respect to a fixed performance standard.
+The critic is necessary because the percepts themselves provide no indication of the agent’s success.
+It is important that the performance standard be fixed.
+
+The last component of the learning agent is the **problem generator**. 
+It is responsible for suggesting actions that will lead to new and informative experiences.
+
+Improving the model components of a model-based agent so that they conform 
+better with reality is almost always a good idea, regardless of the external 
+performance standard.
+In a sense, the performance standard distinguishes part of the incoming percept 
+as a **reward** (or **penalty**) that provides direct feedback on the quality of 
+the agent’s behavior.
+More generally, *human choices* can provide information about human preferences.
+
+Learning in intelligent agents can be summarized as a process of modification of
+each component of the agent to bring the components into closer agreement with 
+the available feedback information, thereby improving the overall performance of 
+the agent.
+
+2.4.7 How the components of agent programs work
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Roughly speaking, we can place the representations along an axis of increasing 
+complexity and expressive power—atomic, factored, and structured.
+
+.. image:: ../_static/Fig2.16.png
+
+In an **atomic representation** each state of the world is indivisible—it has no internal structure.
+The standard algorithms underlying search and game-playing, hidden Markov 
+models, and Markov decision processes all work with atomic representations.
+
+A **factored representation** splits up each state into a fixed set of 
+**variables** or **attributes**, each of which can have a **value**.
+Many important areas of AI are based on factored representations, including
+constraint satisfaction algorithms, propositional logic, planning, Bayesian 
+networks, and various machine learning algorithms.
+
+In a **Structured representation**, objects and their various and varying relationships can be described explicitly.
+Structured representations underlie relational databases and first-order logic, 
+first-order probability models, and much of natural language understanding.
+
+The axis along which atomic, factored, and structured representations lie is the 
+axis of increasing **expressiveness**. 
+Roughly speaking, a more expressive representation can capture, at least as 
+concisely, everything a less expressive one can capture, plus some more.
+
+Another axis for representation involves the mapping of concepts to locations in 
+physical memory, whether in a computer or in a brain. 
+If there is a one-to-one mapping between concepts and memory locations, we call that a **localist representation**. 
+On the other hand, if the representation of a concept is spread over many memory 
+locations, and each memory location is employed as part of the representation of 
+multiple different concepts, we call that a **distributed representation**.
+Distributed representations are more robust against noise and information loss.
