@@ -13,6 +13,7 @@ Study notes of Artificail Intelligence A Modern Approach, 4th Edition by Stuart 
    :caption: Contents:
 
    part1/index1
+   part2/index2
 
 .. Indices and tables
 .. ==================
