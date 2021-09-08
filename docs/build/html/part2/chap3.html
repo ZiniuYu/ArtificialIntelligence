@@ -92,7 +92,14 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../part1/index1.html">Part 1 Artificial Intelligence</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index2.html">Part 2 Problem-solving</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Chapter 3 Solving Problems by Searching</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Chapter 3 Solving Problems by Searching</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#problem-solving-agents">3.1 Problem-Solving Agents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#search-problems-and-solutions">3.1.1 Search problems and solutions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#formulating-problems">3.1.2 Formulating problems</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="chap4.html">Chapter 4 Search in Complex Environments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="chap5.html">Chapter 5</a></li>
 <li class="toctree-l2"><a class="reference internal" href="chap6.html">Chapter 6</a></li>
@@ -221,9 +228,85 @@
 \newcommand{\bv}{\begin{vmatrix}}
 \newcommand{\ev}{\end{vmatrix}}\\\newcommand{\im}{^{-1}}
 \newcommand{\pr}{^{\prime}}
-\newcommand{\ppr}{^{\prime\prime}}\end{aligned}\end{align} \]</div>
+\newcommand{\ppr}{^{\prime\prime}}
+\newcommand{\-}{\mbox{-}}\end{aligned}\end{align} \]</div>
 <div class="section" id="chapter-3-solving-problems-by-searching">
 <h1>Chapter 3 Solving Problems by Searching<a class="headerlink" href="#chapter-3-solving-problems-by-searching" title="Permalink to this headline">¶</a></h1>
+<p>When the correct action to take is not immediately obvious, an agent may need to
+<em>plan ahead</em>: to consider a <em>sequence</em> of actions that form a path to a goal
+state.
+Such an agent is called a <strong>problem-solving agent</strong>, and the computational process it undertakes is called <strong>search</strong>.</p>
+<p>Problem-solving agents use <strong>atomic</strong> representations, that is, states of the
+world are considered as wholes, with no internal structure visible to the
+problem-solving algorithms.
+Agents that use <strong>factored</strong> or <strong>structured</strong> representations of states are called <strong>planning agents</strong>.</p>
+<p>We distinguish between <strong>informed</strong> algorithms, in which the agent can estimate
+how far it is from the goal, and <strong>uninformed</strong> algorithms, where no such
+estimate is available.</p>
+<div class="section" id="problem-solving-agents">
+<h2>3.1 Problem-Solving Agents<a class="headerlink" href="#problem-solving-agents" title="Permalink to this headline">¶</a></h2>
+<p>If the agent has no additional information—that is, if the environment is
+<strong>unknown</strong>—then the agent can do no better than to execute one of the actions
+at random.
+For now, we assume that our agents always have access to information about the world.
+With that information, the agent can follow this four-phase problem-solving process:</p>
+<ul class="simple">
+<li><p><strong>GOAL FORMULATION</strong>: Goals organize behavior by limiting the objectives and hence the actions to be considered.</p></li>
+<li><p><strong>PROBLEM FORMULATION</strong>: The agent devises a description of the states and
+actions necessary to reach the goal—an abstract model of the relevant part of
+the world.</p></li>
+<li><p><strong>SEARCH</strong>: Before taking any action in the real world, the agent simulates
+sequences of actions in its model, searching until it finds a sequence of
+actions that reaches the goal.
+Such a sequence is called a <strong>solution</strong>.</p></li>
+<li><p><strong>EXECUTION</strong>: The agent can now execute the actions in the solution, one at a time.</p></li>
+</ul>
+<p>It is an important property that in a fully observable, deterministic, known
+environment, <em>the solution to any problem is a fixed sequence of actions</em>.
+The <strong>open-loop</strong> system means that ignoring the percepts breaks the loop between agent and environment.
+If there is a chance that the model is incorrect, or the environment is
+nondeterministic, then the agent would be safer using a <strong>closed-loop</strong> approach
+that monitors the percepts.</p>
+<p>In partially observable or nondeterministic environments, a solution would be a
+branching strategy that recommends different future actions depending on what
+percepts arrive.</p>
+<div class="section" id="search-problems-and-solutions">
+<h3>3.1.1 Search problems and solutions<a class="headerlink" href="#search-problems-and-solutions" title="Permalink to this headline">¶</a></h3>
+<p>A search <strong>problem</strong> can be defined formally as follows:</p>
+<ul class="simple">
+<li><p>A set of possible <strong>states</strong> that the environment can be in.
+We call this the <strong>state space</strong>.</p></li>
+<li><p>The <strong>initial state</strong> that the agent starts in.</p></li>
+<li><p>A set of one or more <strong>goal states</strong>.
+We can account for all three of these possibilities by specifying an <span class="math notranslate nohighlight">\(Is\-Goal\)</span> method for a problem.</p></li>
+<li><p>The <strong>actions</strong> available to the agent.
+Given a state <span class="math notranslate nohighlight">\(s\)</span>, <span class="math notranslate nohighlight">\(Actions(s)\)</span> returns a finite set of
+actions that can be executed in <span class="math notranslate nohighlight">\(s\)</span>.
+We say that each of these actions is <strong>applicable</strong> in <span class="math notranslate nohighlight">\(s\)</span>.</p></li>
+<li><p>A <strong>transition model</strong>, which describes what each action does.
+<span class="math notranslate nohighlight">\(Result(s,a)\)</span> returns the state that results from doing action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span>.</p></li>
+<li><p>An <strong>action cost function</strong>, denote by <span class="math notranslate nohighlight">\(Action\-Cost(s,a,s\pr)\)</span> when we
+are programming or <span class="math notranslate nohighlight">\(c(s,a,s\pr)\)</span> when we are doing math, that gives the
+numeric cost of applying action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span> to reach state
+<span class="math notranslate nohighlight">\(s\pr\)</span>.</p></li>
+</ul>
+<p>A sequence of actions forms a <strong>path</strong>, and a <strong>solution</strong> is a path from the
+initial state to a goal state.
+We assume that action costs are additive; that is, the total cost of a path is
+the sum of the individual action costs.
+An <strong>optimal solution</strong> has the lowest path cost among all solutions.</p>
+<p>The state space can be represented as a <strong>graph</strong> in which the vertices are
+states and the directed edges between them are actions.</p>
+</div>
+<div class="section" id="formulating-problems">
+<h3>3.1.2 Formulating problems<a class="headerlink" href="#formulating-problems" title="Permalink to this headline">¶</a></h3>
+<p>The process of removing detail from a representation is called <strong>abstraction</strong>.
+The abstraction is <em>valid</em> if we can elaborate any abstract solution into a
+solution in the more detailed world.
+The abstraction is <em>useful</em> if carrying out each of the actions in the solution
+is easier than the original problem.</p>
+</div>
+</div>
 </div>
 
 
