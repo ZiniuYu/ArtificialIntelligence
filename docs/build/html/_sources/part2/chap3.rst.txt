@@ -217,3 +217,28 @@ We call a search algorithm a **graph search** if it checks for redundant paths
 and a **tree-like search** if it does not check.
 
 Third, we can compromise and check for cycles, but not for redundant paths in general.
+
+3.3.4 Measuring problem-solving performance
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* **COMPLETENESS**: Is the algorithm guaranteed to find a solution when there is 
+  one, and to correctly report failure when there is not?
+
+* **COST OPTIMALITY**: Does it find a solution with the lowest path cost of all solutions?
+
+* **TIME COMPLEXITY**: How long does it take to find a solution?
+
+* **SPACE COMPLEXITY**: How much memory is needed to perform the search?
+
+To be complete, a search algorithm must be **systematic** in the way it explores 
+an infinite state space, making sure it can eventually reach any state that is 
+connected to the initial state.
+
+In theoretical computer science, the typical measure of time and space 
+complexity is the size of the state-space graph, :math:`|V|+|E|`, where 
+:math:`|V|` is the number of vertices (state nodes) of the graph and :math:`|E|`
+is the number of edges (distinct state/action pairs).
+For an implicit state space, complexity can be measured in terms of :math:`d`,
+the **depth** or number of actions in an optimal solution; :math:`m`, the 
+maximum number of actions in any path; and :math:`b`, the **branching factor**
+or number of successors of a node that need to be considered.

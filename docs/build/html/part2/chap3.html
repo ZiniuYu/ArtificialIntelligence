@@ -107,6 +107,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#best-first-search">3.3.1 Best-first search</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#search-data-structures">3.3.2 Search data structures</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#redundant-paths">3.3.3 Redundant paths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#measuring-problem-solving-performance">3.3.4 Measuring problem-solving performance</a></li>
 </ul>
 </li>
 </ul>
@@ -416,6 +417,27 @@ to each state.</p>
 We call a search algorithm a <strong>graph search</strong> if it checks for redundant paths
 and a <strong>tree-like search</strong> if it does not check.</p>
 <p>Third, we can compromise and check for cycles, but not for redundant paths in general.</p>
+</div>
+<div class="section" id="measuring-problem-solving-performance">
+<h3>3.3.4 Measuring problem-solving performance<a class="headerlink" href="#measuring-problem-solving-performance" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>COMPLETENESS</strong>: Is the algorithm guaranteed to find a solution when there is
+one, and to correctly report failure when there is not?</p></li>
+<li><p><strong>COST OPTIMALITY</strong>: Does it find a solution with the lowest path cost of all solutions?</p></li>
+<li><p><strong>TIME COMPLEXITY</strong>: How long does it take to find a solution?</p></li>
+<li><p><strong>SPACE COMPLEXITY</strong>: How much memory is needed to perform the search?</p></li>
+</ul>
+<p>To be complete, a search algorithm must be <strong>systematic</strong> in the way it explores
+an infinite state space, making sure it can eventually reach any state that is
+connected to the initial state.</p>
+<p>In theoretical computer science, the typical measure of time and space
+complexity is the size of the state-space graph, <span class="math notranslate nohighlight">\(|V|+|E|\)</span>, where
+<span class="math notranslate nohighlight">\(|V|\)</span> is the number of vertices (state nodes) of the graph and <span class="math notranslate nohighlight">\(|E|\)</span>
+is the number of edges (distinct state/action pairs).
+For an implicit state space, complexity can be measured in terms of <span class="math notranslate nohighlight">\(d\)</span>,
+the <strong>depth</strong> or number of actions in an optimal solution; <span class="math notranslate nohighlight">\(m\)</span>, the
+maximum number of actions in any path; and <span class="math notranslate nohighlight">\(b\)</span>, the <strong>branching factor</strong>
+or number of successors of a node that need to be considered.</p>
 </div>
 </div>
 </div>
