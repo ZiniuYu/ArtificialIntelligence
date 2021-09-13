@@ -91,3 +91,129 @@ The abstraction is *valid* if we can elaborate any abstract solution into a
 solution in the more detailed world.
 The abstraction is *useful* if carrying out each of the actions in the solution 
 is easier than the original problem.
+
+3.2 Example Problems
+--------------------
+
+A **standardized problem** is intended to illustrate or exercise various problem-solving methods.
+It can be given a concise, exact description and hence is suitable as a 
+benchmark for researchers to compare the performance of algorithms. 
+A **real-world problem**, such as robot navigation, is one whose solutions 
+people actually use, and whose formulation is idiosyncratic, not standardized, 
+because, for example, each robot has different sensors that produce different 
+data.
+
+3.2.1 Standardized problems
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A **grid world** problem is a two-dimensional rectangular array of square cells 
+in which agents can move from cell to cell.
+
+* **Vacuum world**
+
+* **Sokoban puzzle**
+
+* **Sliding-tile puzzle**
+
+3.2.2 Real-world problems
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* **Route-finding problem**
+
+* **Touring problems**
+
+* **Trveling salesperson problem (TSP)**
+
+* **VLSI layout problem**
+
+* **Robot navigation**
+
+* **Automatic assembly sequencing**
+
+3.3 Search Algorithms
+---------------------
+
+A **search algorithm** takes a search problem as input and returns a solution, or an indication of failure.
+We consider algorithms that superimpose a **search tree** over the state-space 
+graph, forming various paths from the initial state, trying to find a path that
+reaches a goal state. 
+Each **node** in the search tree corresponds to a state in the state space and 
+the edges in the search tree correspond to actions. 
+The root of the tree corresponds to the initial state of the problem.
+
+The state space describes the (possibly infinite) set of states in the world, 
+and the actions that allow transitions from one state to another. 
+The search tree describes paths between these states, reaching towards the goal. 
+The search tree may have multiple paths to (and thus multiple nodes for) any 
+given state, but each node in the tree has a unique path back to the root (as in 
+all trees).
+
+The **frontier** separates two regions of the state-space graph: an interior 
+region where every state has been expanded, and an exterior region of states 
+that have not yet been reached.
+
+3.3.1 Best-first search
+^^^^^^^^^^^^^^^^^^^^^^^
+
+In **best-first search** we choose a node, :math:`n`, with minimum value of some **evaluation function**, :math:`f(n)`.
+
+.. image:: ../_static/Fig3.7.png
+
+3.3.2 Search data structures
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A **node** in the tree is represented by a data structure with four components
+
+* :math:`node.State`: the state to which the node corresponds;
+
+* :math:`node.Parent`: the node in the tree that generated this node;
+
+* :math:`node.Action`: the action that was applied to the parent’s state to generate this node;
+
+* :math:`node.Path-Cost`: the total cost of the path from the initial state to this node. 
+  In mathematical formulas, we use :math:`g(node)` as a synonym for :math:`Path\-Cost`.
+
+Following the :math:`PARENT` pointers back from a node allows us to recover the 
+states and actions along the path to that node. 
+Doing this from a goal node gives us the solution.
+
+We need a data structure to store the **frontier**. 
+The appropriate choice is a **queue** of some kind, because the operations on a frontier are:
+
+* :math:`Is\-Empty(frontier)` returns true only if there are no nodes in the frontier.
+
+* :math:`Pop(frontier)` removes the top node from the frontier and returns it.
+
+* :math:`Top(frontier)` returns (but does not remove) the top node of the frontier.
+
+* :math:`Add(node, frontier)` inserts node into its proper place in the queue.
+
+Three kinds of queues are used in search algorithms:
+
+* A **priority queue** first pops the node with the minimum cost according to some evaluation function, :math:`f`. 
+  It is used in best-first search.
+
+* A **FIFO queue** or first-in-first-out queue first pops the node that was added to 
+  the queue first; we shall see it is used in breadth-first search.
+
+* A **LIFO queue** or last-in-first-out queue (also known as a **stack**) pops 
+  first the most recently added node; we shall see it is used in depth-first 
+  search.
+
+3.3.3 Redundant paths
+^^^^^^^^^^^^^^^^^^^^^
+
+A cycle is a special case of a **redundant path**.
+
+As the saying goes, *algorithms that cannot remember the past are doomed to repeat it*. 
+There are three approaches to this issue.
+
+First, we can remember all previously reached states (as best-first search 
+does), allowing us to detect all redundant paths, and keep only the best path 
+to each state.
+
+Second, we can not worry about repeating the past.
+We call a search algorithm a **graph search** if it checks for redundant paths 
+and a **tree-like search** if it does not check.
+
+Third, we can compromise and check for cycles, but not for redundant paths in general.

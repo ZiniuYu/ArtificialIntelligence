@@ -98,6 +98,17 @@
 <li class="toctree-l4"><a class="reference internal" href="#formulating-problems">3.1.2 Formulating problems</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#example-problems">3.2 Example Problems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#standardized-problems">3.2.1 Standardized problems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#real-world-problems">3.2.2 Real-world problems</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#search-algorithms">3.3 Search Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#best-first-search">3.3.1 Best-first search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#search-data-structures">3.3.2 Search data structures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#redundant-paths">3.3.3 Redundant paths</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chap4.html">Chapter 4 Search in Complex Environments</a></li>
@@ -305,6 +316,106 @@ The abstraction is <em>valid</em> if we can elaborate any abstract solution into
 solution in the more detailed world.
 The abstraction is <em>useful</em> if carrying out each of the actions in the solution
 is easier than the original problem.</p>
+</div>
+</div>
+<div class="section" id="example-problems">
+<h2>3.2 Example Problems<a class="headerlink" href="#example-problems" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>standardized problem</strong> is intended to illustrate or exercise various problem-solving methods.
+It can be given a concise, exact description and hence is suitable as a
+benchmark for researchers to compare the performance of algorithms.
+A <strong>real-world problem</strong>, such as robot navigation, is one whose solutions
+people actually use, and whose formulation is idiosyncratic, not standardized,
+because, for example, each robot has different sensors that produce different
+data.</p>
+<div class="section" id="standardized-problems">
+<h3>3.2.1 Standardized problems<a class="headerlink" href="#standardized-problems" title="Permalink to this headline">¶</a></h3>
+<p>A <strong>grid world</strong> problem is a two-dimensional rectangular array of square cells
+in which agents can move from cell to cell.</p>
+<ul class="simple">
+<li><p><strong>Vacuum world</strong></p></li>
+<li><p><strong>Sokoban puzzle</strong></p></li>
+<li><p><strong>Sliding-tile puzzle</strong></p></li>
+</ul>
+</div>
+<div class="section" id="real-world-problems">
+<h3>3.2.2 Real-world problems<a class="headerlink" href="#real-world-problems" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Route-finding problem</strong></p></li>
+<li><p><strong>Touring problems</strong></p></li>
+<li><p><strong>Trveling salesperson problem (TSP)</strong></p></li>
+<li><p><strong>VLSI layout problem</strong></p></li>
+<li><p><strong>Robot navigation</strong></p></li>
+<li><p><strong>Automatic assembly sequencing</strong></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="search-algorithms">
+<h2>3.3 Search Algorithms<a class="headerlink" href="#search-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>search algorithm</strong> takes a search problem as input and returns a solution, or an indication of failure.
+We consider algorithms that superimpose a <strong>search tree</strong> over the state-space
+graph, forming various paths from the initial state, trying to find a path that
+reaches a goal state.
+Each <strong>node</strong> in the search tree corresponds to a state in the state space and
+the edges in the search tree correspond to actions.
+The root of the tree corresponds to the initial state of the problem.</p>
+<p>The state space describes the (possibly infinite) set of states in the world,
+and the actions that allow transitions from one state to another.
+The search tree describes paths between these states, reaching towards the goal.
+The search tree may have multiple paths to (and thus multiple nodes for) any
+given state, but each node in the tree has a unique path back to the root (as in
+all trees).</p>
+<p>The <strong>frontier</strong> separates two regions of the state-space graph: an interior
+region where every state has been expanded, and an exterior region of states
+that have not yet been reached.</p>
+<div class="section" id="best-first-search">
+<h3>3.3.1 Best-first search<a class="headerlink" href="#best-first-search" title="Permalink to this headline">¶</a></h3>
+<p>In <strong>best-first search</strong> we choose a node, <span class="math notranslate nohighlight">\(n\)</span>, with minimum value of some <strong>evaluation function</strong>, <span class="math notranslate nohighlight">\(f(n)\)</span>.</p>
+<img alt="../_images/Fig3.7.png" src="../_images/Fig3.7.png" />
+</div>
+<div class="section" id="search-data-structures">
+<h3>3.3.2 Search data structures<a class="headerlink" href="#search-data-structures" title="Permalink to this headline">¶</a></h3>
+<p>A <strong>node</strong> in the tree is represented by a data structure with four components</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(node.State\)</span>: the state to which the node corresponds;</p></li>
+<li><p><span class="math notranslate nohighlight">\(node.Parent\)</span>: the node in the tree that generated this node;</p></li>
+<li><p><span class="math notranslate nohighlight">\(node.Action\)</span>: the action that was applied to the parent’s state to generate this node;</p></li>
+<li><p><span class="math notranslate nohighlight">\(node.Path-Cost\)</span>: the total cost of the path from the initial state to this node.
+In mathematical formulas, we use <span class="math notranslate nohighlight">\(g(node)\)</span> as a synonym for <span class="math notranslate nohighlight">\(Path\-Cost\)</span>.</p></li>
+</ul>
+<p>Following the <span class="math notranslate nohighlight">\(PARENT\)</span> pointers back from a node allows us to recover the
+states and actions along the path to that node.
+Doing this from a goal node gives us the solution.</p>
+<p>We need a data structure to store the <strong>frontier</strong>.
+The appropriate choice is a <strong>queue</strong> of some kind, because the operations on a frontier are:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Is\-Empty(frontier)\)</span> returns true only if there are no nodes in the frontier.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Pop(frontier)\)</span> removes the top node from the frontier and returns it.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Top(frontier)\)</span> returns (but does not remove) the top node of the frontier.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Add(node, frontier)\)</span> inserts node into its proper place in the queue.</p></li>
+</ul>
+<p>Three kinds of queues are used in search algorithms:</p>
+<ul class="simple">
+<li><p>A <strong>priority queue</strong> first pops the node with the minimum cost according to some evaluation function, <span class="math notranslate nohighlight">\(f\)</span>.
+It is used in best-first search.</p></li>
+<li><p>A <strong>FIFO queue</strong> or first-in-first-out queue first pops the node that was added to
+the queue first; we shall see it is used in breadth-first search.</p></li>
+<li><p>A <strong>LIFO queue</strong> or last-in-first-out queue (also known as a <strong>stack</strong>) pops
+first the most recently added node; we shall see it is used in depth-first
+search.</p></li>
+</ul>
+</div>
+<div class="section" id="redundant-paths">
+<h3>3.3.3 Redundant paths<a class="headerlink" href="#redundant-paths" title="Permalink to this headline">¶</a></h3>
+<p>A cycle is a special case of a <strong>redundant path</strong>.</p>
+<p>As the saying goes, <em>algorithms that cannot remember the past are doomed to repeat it</em>.
+There are three approaches to this issue.</p>
+<p>First, we can remember all previously reached states (as best-first search
+does), allowing us to detect all redundant paths, and keep only the best path
+to each state.</p>
+<p>Second, we can not worry about repeating the past.
+We call a search algorithm a <strong>graph search</strong> if it checks for redundant paths
+and a <strong>tree-like search</strong> if it does not check.</p>
+<p>Third, we can compromise and check for cycles, but not for redundant paths in general.</p>
 </div>
 </div>
 </div>
