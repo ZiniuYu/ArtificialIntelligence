@@ -110,6 +110,19 @@
 <li class="toctree-l4"><a class="reference internal" href="#measuring-problem-solving-performance">3.3.4 Measuring problem-solving performance</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#uninformed-search-strategies">3.4 Uninformed Search Strategies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#breadth-first-search">3.4.1 Breadth-first search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dijkstra-s-algorithm-or-uniform-cost-search">3.4.2 Dijkstra’s algorithm or uniform-cost search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#depth-first-search-and-the-problem-of-memory">3.4.3 Depth-first search and the problem of memory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#depth-limited-and-iterative-deepening-search">3.4.4 Depth-limited and iterative deepening search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bidirectional-search">3.4.5 Bidirectional search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comparing-uninformed-search-algorithms">3.4.6 Comparing uninformed search algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#informed-heuristic-search-strategies">3.5 Informed (Heuristic) Search Strategies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#greedy-best-first-search">3.5.1 Greedy best-first search</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chap4.html">Chapter 4 Search in Complex Environments</a></li>
@@ -380,7 +393,7 @@ that have not yet been reached.</p>
 <li><p><span class="math notranslate nohighlight">\(node.State\)</span>: the state to which the node corresponds;</p></li>
 <li><p><span class="math notranslate nohighlight">\(node.Parent\)</span>: the node in the tree that generated this node;</p></li>
 <li><p><span class="math notranslate nohighlight">\(node.Action\)</span>: the action that was applied to the parent’s state to generate this node;</p></li>
-<li><p><span class="math notranslate nohighlight">\(node.Path-Cost\)</span>: the total cost of the path from the initial state to this node.
+<li><p><span class="math notranslate nohighlight">\(node.Path\-Cost\)</span>: the total cost of the path from the initial state to this node.
 In mathematical formulas, we use <span class="math notranslate nohighlight">\(g(node)\)</span> as a synonym for <span class="math notranslate nohighlight">\(Path\-Cost\)</span>.</p></li>
 </ul>
 <p>Following the <span class="math notranslate nohighlight">\(PARENT\)</span> pointers back from a node allows us to recover the
@@ -438,6 +451,99 @@ For an implicit state space, complexity can be measured in terms of <span class=
 the <strong>depth</strong> or number of actions in an optimal solution; <span class="math notranslate nohighlight">\(m\)</span>, the
 maximum number of actions in any path; and <span class="math notranslate nohighlight">\(b\)</span>, the <strong>branching factor</strong>
 or number of successors of a node that need to be considered.</p>
+</div>
+</div>
+<div class="section" id="uninformed-search-strategies">
+<h2>3.4 Uninformed Search Strategies<a class="headerlink" href="#uninformed-search-strategies" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="breadth-first-search">
+<h3>3.4.1 Breadth-first search<a class="headerlink" href="#breadth-first-search" title="Permalink to this headline">¶</a></h3>
+<p>When all actions have the same cost, an appropriate strategy is
+<strong>breadth-first search</strong>, in which the root node is expanded first, then all the
+successors of the root node are expanded next, then <em>their</em> successors, and so
+on.</p>
+<img alt="../_images/Fig3.9.png" src="../_images/Fig3.9.png" />
+<p>Breadth-first search always finds a solution with a minimal number of actions,
+because when it is generating nodes at depth <span class="math notranslate nohighlight">\(d\)</span>, it has already generated
+all the nodes at depth <span class="math notranslate nohighlight">\(d-1\)</span>, so if one of them were a solution, it would
+have been found.</p>
+<p>All the nodes remain in memory, so both time and space complexity are <span class="math notranslate nohighlight">\(O(b^d)\)</span>.
+<em>The memory requirements are a bigger problem for breadth-first search than the execution time</em>.
+In general, <em>exponential-complexity search problems cannot be solved by</em>
+<em>uninformed search for any but the smallest instances</em>.</p>
+</div>
+<div class="section" id="dijkstra-s-algorithm-or-uniform-cost-search">
+<h3>3.4.2 Dijkstra’s algorithm or uniform-cost search<a class="headerlink" href="#dijkstra-s-algorithm-or-uniform-cost-search" title="Permalink to this headline">¶</a></h3>
+<p>When actions have different costs, an obvious choice is to use best-first search
+where the evaluation function is the cost of the path from the root to the
+current node.
+This is called Dijkstra’s algorithm by the theoretical computer science
+community, and <strong>uniform-cost search</strong> by the AI community.</p>
+<p>The complexity of uniform-cost search is characterized in terms of <span class="math notranslate nohighlight">\(C^*\)</span>,
+the cost of the optimal solution, and <span class="math notranslate nohighlight">\(\epsilon\)</span>, a lower bound on the
+cost of each action, with <span class="math notranslate nohighlight">\(\epsilon&gt;0\)</span>.
+Then the algorithm’s worst-case time and space complexity is
+<span class="math notranslate nohighlight">\(O(b^{1+\lfloor C^*/\epsilon\rfloor})\)</span>, which can be much greater than
+<span class="math notranslate nohighlight">\(b^d\)</span>.</p>
+<p>When all action costs are equal, <span class="math notranslate nohighlight">\(b^{1+\lfloor C^*/\epsilon\rfloor}\)</span> is
+just <span class="math notranslate nohighlight">\(b^{d+1}\)</span>, and uniform-cost search is similar to breadth-first
+search.</p>
+</div>
+<div class="section" id="depth-first-search-and-the-problem-of-memory">
+<h3>3.4.3 Depth-first search and the problem of memory<a class="headerlink" href="#depth-first-search-and-the-problem-of-memory" title="Permalink to this headline">¶</a></h3>
+<p><strong>Depth-first search</strong> always expands the <em>deepest</em> node in the frontier first.
+It could be implemented as a call to <span class="math notranslate nohighlight">\(Best\-First\-Search\)</span> where the
+evaluation function <span class="math notranslate nohighlight">\(f\)</span> is the negative of the depth.</p>
+<p>For problems where a tree-like search is feasible, depth-first search has much smaller needs for memory.
+A depth-first tree-like search takes time proportional to the number of states,
+and has memory complexity of only <span class="math notranslate nohighlight">\(O(bm)\)</span>, where <span class="math notranslate nohighlight">\(b\)</span> is the
+branching factor and <span class="math notranslate nohighlight">\(m\)</span> is the maximum depth of the tree.</p>
+<p>A variant of depth-first search called <strong>backtracking search</strong> uses even less memory.</p>
+</div>
+<div class="section" id="depth-limited-and-iterative-deepening-search">
+<h3>3.4.4 Depth-limited and iterative deepening search<a class="headerlink" href="#depth-limited-and-iterative-deepening-search" title="Permalink to this headline">¶</a></h3>
+<p>To keep depth-first search from wandering down an infinite path, we can use
+<strong>depth-limited search</strong>, a version of depth-first search in which we supply a
+depth limit, <span class="math notranslate nohighlight">\(l\)</span>, and treat all nodes at depth <span class="math notranslate nohighlight">\(l\)</span> as if they had no
+successors.
+The time complexity is <span class="math notranslate nohighlight">\(O(b^l)\)</span> and the space complexity is <span class="math notranslate nohighlight">\(O(bl)\)</span></p>
+<img alt="../_images/Fig3.12.png" src="../_images/Fig3.12.png" />
+<p><strong>Iterative deepening search</strong> solves the problem of picking a good value for
+<span class="math notranslate nohighlight">\(l\)</span> by trying all values: first 0, then 1, then 2, and so on—until either
+a solution is found, or the depth- limited search returns the <em>failure</em> value
+rather than the <em>cutoff</em> value.</p>
+<p>Its memory requirements are modest: <span class="math notranslate nohighlight">\(O(bd)\)</span> when there is a solution, or
+<span class="math notranslate nohighlight">\(O(bm)\)</span> on finite state spaces with no solution.
+The time complexity is <span class="math notranslate nohighlight">\(O(bd)\)</span> when there is a solution, or <span class="math notranslate nohighlight">\(O(bm)\)</span> when there is none.</p>
+<p><em>In general, iterative deepening is the preferred uninformed search method when</em>
+<em>the search state space is larger than can fit in memory and the depth of the</em>
+<em>solution is not known</em>.</p>
+</div>
+<div class="section" id="bidirectional-search">
+<h3>3.4.5 Bidirectional search<a class="headerlink" href="#bidirectional-search" title="Permalink to this headline">¶</a></h3>
+<p>An alternative approach called <strong>bidirectional search</strong> simultaneously searches
+forward from the initial state and backwards from the goal state(s), hoping that
+the two searches will meet.</p>
+<img alt="../_images/Fig3.14.png" src="../_images/Fig3.14.png" />
+</div>
+<div class="section" id="comparing-uninformed-search-algorithms">
+<h3>3.4.6 Comparing uninformed search algorithms<a class="headerlink" href="#comparing-uninformed-search-algorithms" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/Fig3.15.png" src="../_images/Fig3.15.png" />
+</div>
+</div>
+<div class="section" id="informed-heuristic-search-strategies">
+<h2>3.5 Informed (Heuristic) Search Strategies<a class="headerlink" href="#informed-heuristic-search-strategies" title="Permalink to this headline">¶</a></h2>
+<p>An <strong>informed search</strong> strategy uses domain–specific hints about the location
+of goals to find colutions more efficiently than an uninformed strategy.
+The hints come in the form of a <strong>heuristic function</strong>, denoted <span class="math notranslate nohighlight">\(h(n)\)</span>:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(h(n)\)</span> = estimated cost of the cheapest path from the state at node <span class="math notranslate nohighlight">\(n\)</span> to a goal state.</p>
+</div></blockquote>
+<div class="section" id="greedy-best-first-search">
+<h3>3.5.1 Greedy best-first search<a class="headerlink" href="#greedy-best-first-search" title="Permalink to this headline">¶</a></h3>
+<p>Greedy best-first search is a form of best-first search that expands first the
+node with the lowest <span class="math notranslate nohighlight">\(h(n)\)</span> value—the node that appears to be closest to
+the goal—on the grounds that this is likely to lead to a solution quickly.
+So the evaluation function <span class="math notranslate nohighlight">\(f(n)=h(n)\)</span>.</p>
 </div>
 </div>
 </div>

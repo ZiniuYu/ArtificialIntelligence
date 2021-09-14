@@ -170,7 +170,7 @@ A **node** in the tree is represented by a data structure with four components
 
 * :math:`node.Action`: the action that was applied to the parent’s state to generate this node;
 
-* :math:`node.Path-Cost`: the total cost of the path from the initial state to this node. 
+* :math:`node.Path\-Cost`: the total cost of the path from the initial state to this node. 
   In mathematical formulas, we use :math:`g(node)` as a synonym for :math:`Path\-Cost`.
 
 Following the :math:`PARENT` pointers back from a node allows us to recover the 
@@ -242,3 +242,115 @@ For an implicit state space, complexity can be measured in terms of :math:`d`,
 the **depth** or number of actions in an optimal solution; :math:`m`, the 
 maximum number of actions in any path; and :math:`b`, the **branching factor**
 or number of successors of a node that need to be considered.
+
+3.4 Uninformed Search Strategies
+--------------------------------
+
+3.4.1 Breadth-first search
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When all actions have the same cost, an appropriate strategy is 
+**breadth-first search**, in which the root node is expanded first, then all the 
+successors of the root node are expanded next, then *their* successors, and so 
+on.
+
+.. image:: ../_static/Fig3.9.png
+
+Breadth-first search always finds a solution with a minimal number of actions, 
+because when it is generating nodes at depth :math:`d`, it has already generated 
+all the nodes at depth :math:`d-1`, so if one of them were a solution, it would 
+have been found.
+
+All the nodes remain in memory, so both time and space complexity are :math:`O(b^d)`.
+*The memory requirements are a bigger problem for breadth-first search than the execution time*.
+In general, *exponential-complexity search problems cannot be solved by*
+*uninformed search for any but the smallest instances*.
+
+3.4.2 Dijkstra's algorithm or uniform-cost search
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When actions have different costs, an obvious choice is to use best-first search 
+where the evaluation function is the cost of the path from the root to the 
+current node. 
+This is called Dijkstra’s algorithm by the theoretical computer science 
+community, and **uniform-cost search** by the AI community.
+
+The complexity of uniform-cost search is characterized in terms of :math:`C^*`, 
+the cost of the optimal solution, and :math:`\epsilon`, a lower bound on the
+cost of each action, with :math:`\epsilon>0`.
+Then the algorithm's worst-case time and space complexity is 
+:math:`O(b^{1+\lfloor C^*/\epsilon\rfloor})`, which can be much greater than
+:math:`b^d`.
+
+When all action costs are equal, :math:`b^{1+\lfloor C^*/\epsilon\rfloor}` is 
+just :math:`b^{d+1}`, and uniform-cost search is similar to breadth-first 
+search.
+
+3.4.3 Depth-first search and the problem of memory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Depth-first search** always expands the *deepest* node in the frontier first. 
+It could be implemented as a call to :math:`Best\-First\-Search` where the 
+evaluation function :math:`f` is the negative of the depth.
+
+For problems where a tree-like search is feasible, depth-first search has much smaller needs for memory.
+A depth-first tree-like search takes time proportional to the number of states, 
+and has memory complexity of only :math:`O(bm)`, where :math:`b` is the 
+branching factor and :math:`m` is the maximum depth of the tree.
+
+A variant of depth-first search called **backtracking search** uses even less memory.
+
+3.4.4 Depth-limited and iterative deepening search
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To keep depth-first search from wandering down an infinite path, we can use
+**depth-limited search**, a version of depth-first search in which we supply a 
+depth limit, :math:`l`, and treat all nodes at depth :math:`l` as if they had no
+successors.
+The time complexity is :math:`O(b^l)` and the space complexity is :math:`O(bl)`
+
+.. image:: ../_static/Fig3.12.png
+
+**Iterative deepening search** solves the problem of picking a good value for 
+:math:`l` by trying all values: first 0, then 1, then 2, and so on—until either 
+a solution is found, or the depth- limited search returns the *failure* value 
+rather than the *cutoff* value.
+
+Its memory requirements are modest: :math:`O(bd)` when there is a solution, or 
+:math:`O(bm)` on finite state spaces with no solution.
+The time complexity is :math:`O(bd)` when there is a solution, or :math:`O(bm)` when there is none.
+
+*In general, iterative deepening is the preferred uninformed search method when* 
+*the search state space is larger than can fit in memory and the depth of the*
+*solution is not known*.
+
+3.4.5 Bidirectional search
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+An alternative approach called **bidirectional search** simultaneously searches 
+forward from the initial state and backwards from the goal state(s), hoping that 
+the two searches will meet.
+
+.. image:: ../_static/Fig3.14.png
+
+3.4.6 Comparing uninformed search algorithms
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. image:: ../_static/Fig3.15.png
+
+3.5 Informed (Heuristic) Search Strategies
+------------------------------------------
+
+An **informed search** strategy uses domain--specific hints about the location 
+of goals to find colutions more efficiently than an uninformed strategy. 
+The hints come in the form of a **heuristic function**, denoted :math:`h(n)`:
+
+  :math:`h(n)` = estimated cost of the cheapest path from the state at node :math:`n` to a goal state.
+
+3.5.1 Greedy best-first search
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Greedy best-first search is a form of best-first search that expands first the 
+node with the lowest :math:`h(n)` value—the node that appears to be closest to 
+the goal—on the grounds that this is likely to lead to a solution quickly.
+So the evaluation function :math:`f(n)=h(n)`.
